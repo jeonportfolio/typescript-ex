@@ -50,3 +50,65 @@ console.log(
     toArray({ x:1 }, { x:2 }), //x타입의 객체만 들어올 수 있음 
     toArray<Arr>([1,2],[3,4])//배열안 숫자가 2개만 들어가는 튜플형식
 )
+
+class UserTT<P> {
+   constructor(public payload: P) {}
+   getPayload() {
+        return this.payload
+   }
+}
+
+interface UserAType {
+    name: string 
+    age: number 
+    isValid: boolean 
+}
+
+interface UserBType {
+    name: string 
+    age: number 
+    emails: string[]
+}
+
+const hero = new UserTT<UserAType> ({
+    name: 'HERO',
+    age:85,
+    isValid: true,
+})
+
+const nno = new UserTT<UserBType>({
+    name: 'NNO',
+    age: 50,
+    emails: ['NNO@naver.com']
+})
+
+
+//인터페이스 제약조건 
+
+interface MyData<T> {  //여기다가 <T>부분에 <T extends string | number[]> 이러면 string이랑 number[]만 가능하게됨 
+    name :string
+    value: T
+}
+
+const dataA: MyData<string> = {
+    name: 'Data A',
+    value: 'Hello world'
+}
+
+const dataB: MyData<number> = {
+    name: 'Data A',
+    value: 123
+}
+
+
+const dataC: MyData<boolean> = {
+    name: 'Data A',
+    value: false
+}
+
+const dataD: MyData<number[]> = {
+    name: 'Data A',
+    value: [1,2,3,4]
+}
+
+
